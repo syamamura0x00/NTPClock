@@ -1,6 +1,7 @@
 
 import time
 import datetime
+import logging
 
 import ntplib
 
@@ -56,8 +57,12 @@ class _Time(object):
             remote_time = self.get_time(self.host)
             correction_time = time.time() - base_time
             self.is_failed = False
+            logging.info(f"Sync time: host={self.host}, remote_time={remote_time}")
+
         except ntplib.NTPException as e:
             self.is_failed = True
+            logging.error(f"Sync time failed: host={self.host}, message={e}")
+            return
 
         self.correctioned_remote_time = remote_time - correction_time
 

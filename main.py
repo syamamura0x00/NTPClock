@@ -2,9 +2,13 @@
 
 import sys
 import time
+import logging
 
 import pygame
 from pygame.locals import *
+
+# from PySide2 import QtCore, QtGui, QtWidgets
+
 
 from ntp import NTPClient
 
@@ -25,6 +29,8 @@ SCREEN_WIDTH = 1920
 SCREEN_HEIGHT = 1080
 
 def main():
+    logging.basicConfig(level=logging.DEBUG)
+
     ntp_client = NTPClient(NTP_SERVER_LIST, TIMEZONE)
     ntp_client.sync()
 
@@ -36,7 +42,10 @@ def main():
     scrreen_width = display_info.current_w
     scrreen_height = display_info.current_h
 
-    print(display_info)
+    display_driver = pygame.display.get_driver()
+
+    logging.info(f"Pygame: display_driver={display_driver}")
+    # print(display_info)
 
     screen_flags = pygame.DOUBLEBUF
     if IS_FULLSCREEN:
@@ -45,6 +54,7 @@ def main():
         screen_flags |= pygame.RESIZABLE
 
     screen = pygame.display.set_mode((scrreen_width, scrreen_height), screen_flags, screen_bitsize)
+    screen_2 = pygame.display.set_mode((scrreen_width, scrreen_height), screen_flags, screen_bitsize)
     pygame.display.set_caption("NTPClock")
 
     clock = pygame.time.Clock()
@@ -89,7 +99,8 @@ def main():
 
         if time.time() - one_sec_timer > 1.0:
             one_sec_timer = time.time()
-            avg_fps = sum(accumulation_fps) / len(accumulation_fps)
+            if len(accumulation_fps):
+                avg_fps = sum(accumulation_fps) / len(accumulation_fps)
 
         pygame.display.set_caption(f"NTPClock [FPS: {fps:.02f}, Avg.: {avg_fps:.02f}]")
 
