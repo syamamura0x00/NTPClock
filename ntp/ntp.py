@@ -23,13 +23,13 @@ class NTPClient(object):
 
 
     def get_datetime(self):
-        correction_time = time.time() - self._base_time
+        # correction_time = time.time() - self._base_time
 
         times = []
 
         for client in self._clients:
             if not client.is_failed:
-                ts = client.correctioned_remote_time + correction_time
+                ts = client.correctioned_remote_time # + correction_time
                 times.append(ts)
                 # print(f"{client.host:<24}{ts:.08f}")
 
