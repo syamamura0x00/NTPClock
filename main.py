@@ -84,7 +84,7 @@ def main():
         main_clock_render = main_clock_font.render(current_str, False, get_rgb(COLOR_FONT))
 
         # FPSレンダリング
-        fps_render = fps_font.render(f"{avg_fps:.02f}fps", False, get_rgb(COLOR_INFO))
+        fps_render = fps_font.render(f"{avg_fps:.02f} FPS", False, get_rgb(0x00FF00))
 
         # ================================================================
         # イベント処理
