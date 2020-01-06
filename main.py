@@ -24,9 +24,15 @@ NTP_SERVER_LIST = [
 
 TIMEZONE = +9
 
-IS_FULLSCREEN = False
+IS_FULLSCREEN = True
 SCREEN_WIDTH = 1920
 SCREEN_HEIGHT = 1080
+
+COLOR_BG = 0x394552
+COLOR_FONT = 0xE1EBF5
+COLOR_BOLD = 0xF7665C
+COLOR_INFO = 0xB4C43B
+
 
 def main():
     logging.basicConfig(level=logging.DEBUG)
@@ -71,8 +77,8 @@ def main():
         frame_start_time = time.time()
 
         current_dt = ntp_client.get_datetime()
-        current_str = current_dt.strftime("%Y-%m-%d %H:%M:%S") + f".{current_dt.microsecond}"
-        main_clock_rander = main_clock_font.render(current_str, False, get_rgb(0xFF0080))
+        current_str = current_dt.strftime("%Y-%m-%d %H:%M:%S") + f".{str(current_dt.microsecond)[0]}"
+        main_clock_rander = main_clock_font.render(current_str, False, get_rgb(COLOR_FONT))
 
         for event in pygame.event.get(): # 終了処理
             if event.type == pygame.QUIT:
@@ -87,7 +93,7 @@ def main():
         # ================================================================
         # Draw
         # ================================================================
-        screen.fill((0, 255 ,0))
+        screen.fill(get_rgb(COLOR_BG))
 
         screen.blit(main_clock_rander, (50, 20))
 
