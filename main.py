@@ -68,7 +68,7 @@ def main():
 
     # Initialize fonts
     main_clock_font = pygame.font.SysFont(None, 120)
-    fps_font = pygame.font.SysFont(None, 11)
+    fps_font = pygame.font.SysFont(None, 18)
 
     accumulation_fps = []
     avg_fps = 0.0
@@ -84,7 +84,7 @@ def main():
         main_clock_render = main_clock_font.render(current_str, False, get_rgb(COLOR_FONT))
 
         # FPSレンダリング
-        fps_render = fps_font.render(f"{avg_fps}fps", False, get_rgb(COLOR_INFO))
+        fps_render = fps_font.render(f"{avg_fps:.02f}fps", False, get_rgb(COLOR_INFO))
 
         # ================================================================
         # イベント処理
