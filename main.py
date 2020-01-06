@@ -104,7 +104,7 @@ def main():
         # ================================================================
         screen.fill(get_rgb(COLOR_BG))
 
-        screen.blit(main_clock_render, (70, scrreen_height / 2 - 48))
+        screen.blit(main_clock_render, (80, scrreen_height / 2 - 100))
         screen.blit(fps_render, (5, 5))
 
         pygame.display.flip()
