@@ -25,6 +25,7 @@ NTP_SERVER_LIST = [
 TIMEZONE = +9
 
 IS_FULLSCREEN = False
+FRAME_RATE = 60
 SCREEN_WIDTH = 1920
 SCREEN_HEIGHT = 1080
 
@@ -70,7 +71,6 @@ def main():
 
     accumulation_fps = []
     avg_fps = 0.0
-    frame_count = 0
     one_sec_timer = time.time()
 
     while True:
@@ -78,7 +78,7 @@ def main():
 
         current_dt = ntp_client.get_datetime()
         current_str = current_dt.strftime("%Y/%m/%d %H:%M:%S") + f".{str(current_dt.microsecond)[0:1]}"
-        sys.stdout.write(f"{current_str}\r")
+        # sys.stdout.write(f"{current_str}\r")
 
         main_clock_rander = main_clock_font.render(current_str, False, get_rgb(COLOR_FONT))
 
@@ -113,9 +113,13 @@ def main():
 
         pygame.display.set_caption(f"NTPClock [FPS: {fps:.02f}, Avg.: {avg_fps:.02f}]")
 
+        vsync_wait = 1.0 / FRAME_RATE
+
+        if vsync_wait > frame_time:
+            time.sleep(vsync_wait - frame_time)
 
 
-        frame_count += 1
+
 
 
 def get_rgb(hex):
