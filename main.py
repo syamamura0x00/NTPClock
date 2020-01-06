@@ -103,6 +103,12 @@ def main():
         # pygame.display.update()
 
         frame_time = time.time() - frame_start_time
+        vsync_wait = 1.0 / FRAME_RATE
+
+        if vsync_wait > frame_time:
+            time.sleep(vsync_wait - frame_time)
+
+        frame_time = time.time() - frame_start_time
         fps = 1.0 / (frame_time)
         accumulation_fps.append(fps)
 
@@ -113,10 +119,6 @@ def main():
 
         pygame.display.set_caption(f"NTPClock [FPS: {fps:.02f}, Avg.: {avg_fps:.02f}]")
 
-        vsync_wait = 1.0 / FRAME_RATE
-
-        if vsync_wait > frame_time:
-            time.sleep(vsync_wait - frame_time)
 
 
 
