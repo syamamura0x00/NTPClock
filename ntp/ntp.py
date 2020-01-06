@@ -21,21 +21,21 @@ class NTPClient(object):
         for client in self._clients:
             client.update(self._base_time)
 
+        self._correction_time = time.time() - self._base_time
 
     def get_datetime(self):
-        # correction_time = time.time() - self._base_time
 
         times = []
 
         for client in self._clients:
             if not client.is_failed:
-                ts = client.correctioned_remote_time # + correction_time
+                ts = client.correctioned_remote_time + self._correction_time
                 times.append(ts)
                 # print(f"{client.host:<24}{ts:.08f}")
 
         avg_time = sum(times) / len(times)
 
-        current_ts = avg_time + (correction_time + time.time() - self._base_time)
+        current_ts = avg_time + (self._correction_time + time.time() - self._base_time)
         current_dt = datetime.datetime.fromtimestamp(current_ts, datetime.timezone(datetime.timedelta(hours=self._timezone)))
 
         # sys.stdout.write(current_dt.strftime("%Y-%m-%d %H:%M:%S") + f".{current_dt.microsecond}")

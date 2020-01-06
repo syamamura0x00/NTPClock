@@ -24,7 +24,7 @@ NTP_SERVER_LIST = [
 
 TIMEZONE = +9
 
-IS_FULLSCREEN = True
+IS_FULLSCREEN = False
 SCREEN_WIDTH = 1920
 SCREEN_HEIGHT = 1080
 
@@ -78,6 +78,8 @@ def main():
 
         current_dt = ntp_client.get_datetime()
         current_str = current_dt.strftime("%Y/%m/%d %H:%M:%S") + f".{str(current_dt.microsecond)[0:1]}"
+        sys.stdout.write(f"{current_str}\r")
+
         main_clock_rander = main_clock_font.render(current_str, False, get_rgb(COLOR_FONT))
 
         for event in pygame.event.get(): # 終了処理
@@ -100,18 +102,20 @@ def main():
         pygame.display.flip()
         # pygame.display.update()
 
-        fps = (time.time() - frame_start_time) * 1000
+        frame_time = time.time() - frame_start_time
+        fps = 1.0 / (frame_time)
         accumulation_fps.append(fps)
 
-        # if time.time() - one_sec_timer > 1.0:
-        #     one_sec_timer = time.time()
-        #     if len(accumulation_fps):
-        #         avg_fps = sum(accumulation_fps) / len(accumulation_fps)
+        if time.time() - one_sec_timer > 1.0:
+            one_sec_timer = time.time()
+            if len(accumulation_fps):
+                avg_fps = sum(accumulation_fps) / len(accumulation_fps)
 
-        # pygame.display.set_caption(f"NTPClock [FPS: {fps:.02f}, Avg.: {avg_fps:.02f}]")
+        pygame.display.set_caption(f"NTPClock [FPS: {fps:.02f}, Avg.: {avg_fps:.02f}]")
+
+
 
         frame_count += 1
-        # clock.tick(0.5)
 
 
 def get_rgb(hex):
