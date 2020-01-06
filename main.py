@@ -68,20 +68,27 @@ def main():
 
     # Initialize fonts
     main_clock_font = pygame.font.SysFont(None, 120)
+    fps_font = pygame.font.SysFont(None, 11)
 
     accumulation_fps = []
     avg_fps = 0.0
+    fps = 0.0
     one_sec_timer = time.time()
 
     while True:
+        # 時刻レンダリング
         frame_start_time = time.time()
 
         current_dt = ntp_client.get_datetime()
         current_str = current_dt.strftime("%Y/%m/%d %H:%M:%S") + f".{str(current_dt.microsecond)[0:1]}"
-        # sys.stdout.write(f"{current_str}\r")
+        main_clock_render = main_clock_font.render(current_str, False, get_rgb(COLOR_FONT))
 
-        main_clock_rander = main_clock_font.render(current_str, False, get_rgb(COLOR_FONT))
+        # FPSレンダリング
+        fps_render = fps_font.render(f"{avg_fps}fps", False, get_rgb(COLOR_INFO))
 
+        # ================================================================
+        # イベント処理
+        # ================================================================
         for event in pygame.event.get(): # 終了処理
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -97,7 +104,8 @@ def main():
         # ================================================================
         screen.fill(get_rgb(COLOR_BG))
 
-        screen.blit(main_clock_rander, (50, 20))
+        screen.blit(main_clock_render, (50, 50))
+        screen.blit(fps_render, (5, 5))
 
         pygame.display.flip()
 
