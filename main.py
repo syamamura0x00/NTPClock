@@ -66,7 +66,7 @@ def main():
     clock = pygame.time.Clock()
 
     # Initialize fonts
-    main_clock_font = pygame.font.SysFont(None, 80)
+    main_clock_font = pygame.font.SysFont(None, 120)
 
     accumulation_fps = []
     avg_fps = 0.0
@@ -77,7 +77,7 @@ def main():
         frame_start_time = time.time()
 
         current_dt = ntp_client.get_datetime()
-        current_str = current_dt.strftime("%Y-%m-%d %H:%M:%S") + f".{str(current_dt.microsecond)[0:3]}"
+        current_str = current_dt.strftime("%Y/%m/%d %H:%M:%S") + f".{str(current_dt.microsecond)[0:1]}"
         main_clock_rander = main_clock_font.render(current_str, False, get_rgb(COLOR_FONT))
 
         for event in pygame.event.get(): # 終了処理
@@ -111,7 +111,7 @@ def main():
         # pygame.display.set_caption(f"NTPClock [FPS: {fps:.02f}, Avg.: {avg_fps:.02f}]")
 
         frame_count += 1
-        clock.tick(0.5)
+        # clock.tick(0.5)
 
 
 def get_rgb(hex):
