@@ -67,7 +67,7 @@ def main():
     clock = pygame.time.Clock()
 
     # Initialize fonts
-    main_clock_font = pygame.font.SysFont(None, 120)
+    main_clock_font = pygame.font.SysFont(None, 200)
     fps_font = pygame.font.SysFont(None, 24)
 
     accumulation_fps = []
