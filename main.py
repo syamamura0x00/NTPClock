@@ -67,9 +67,9 @@ def main():
     clock = pygame.time.Clock()
 
     # Initialize fonts
-    main_date_font = pygame.font.SysFont(None, 160)
+    main_date_font = pygame.font.SysFont(None, 140)
     main_clock_font = pygame.font.SysFont(None, 240)
-    main_sec_font = pygame.font.SysFont(None, 180)
+    main_sec_font = pygame.font.SysFont(None, 160)
     fps_font = pygame.font.SysFont(None, 64)
 
     accumulation_fps = []
@@ -83,7 +83,7 @@ def main():
 
         current_dt = ntp_client.get_datetime()
 
-        current_date_str = current_dt.strftime("%Y/%m/%d/(%A)")
+        current_date_str = current_dt.strftime("%Y/%m/%d/(%a)")
         current_clock_str = current_dt.strftime("%H:%M")
         current_sec_str = f"{current_dt.second}.{str(current_dt.microsecond)[0:1]}"
 
@@ -119,9 +119,9 @@ def main():
 
         print(int(scrreen_height  - (main_date_size_w / 2)))
 
-        screen.blit(main_date_render, (int(scrreen_height  - (main_date_size_w / 2)), 20))
-        screen.blit(main_clock_render, (80, scrreen_height / 2 - 100))
-        screen.blit(main_sec_render, (80, scrreen_height / 2 - 100))
+        screen.blit(main_date_render, (int(scrreen_height  - (main_date_size_w / 2)), 40))
+        screen.blit(main_clock_render, (int(scrreen_height  - (main_clock_size_w / 2) - main_sec_size_w), scrreen_height / 2 - 100))
+        screen.blit(main_sec_render, (int(scrreen_height  - (main_sec_size_w / 2) + main_clock_size_w), scrreen_height / 2 - 100))
 
         screen.blit(fps_render, (5, 5))
 
