@@ -117,9 +117,9 @@ def main():
         # ================================================================
         screen.fill(get_rgb(COLOR_BG))
 
-        screen.blit(main_date_render, (int(scrreen_height  - (main_date_size_w / 2)), 40))
+        screen.blit(main_date_render, (int(scrreen_height  - (main_date_size_w / 2)), 60))
         screen.blit(main_clock_render, (int(scrreen_height  - (main_clock_size_w / 2) - (main_sec_size_w / 2) - 16), scrreen_height / 2 - 100))
-        screen.blit(main_sec_render, (int(scrreen_height  - (main_sec_size_w / 2) + (main_clock_size_w / 2) + 16), (scrreen_height / 2 - 100) + main_clock_size_h - main_sec_size_h))
+        screen.blit(main_sec_render, (int(scrreen_height  - (main_sec_size_w / 2) + (main_clock_size_w / 2) + 16), (scrreen_height / 2 - 100) + (main_clock_size_h / 2) - main_sec_size_h))
 
         screen.blit(fps_render, (5, 5))
 
