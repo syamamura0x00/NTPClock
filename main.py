@@ -68,7 +68,7 @@ def main():
     clock = pygame.time.Clock()
 
     # Initialize fonts
-    main_date_font = pygame.font.SysFont(None, 200)
+    main_date_font = pygame.font.SysFont(None, 180)
     main_clock_font = pygame.font.SysFont(None, 320)
     main_sec_font = pygame.font.SysFont(None, 240)
     fps_font = pygame.font.SysFont(None, 64)
@@ -119,8 +119,8 @@ def main():
         screen.fill(get_rgb(COLOR_BG))
 
         screen.blit(main_date_render, (int(scrreen_height  - (main_date_size_w / 2)), 80))
-        screen.blit(main_clock_render, (int(scrreen_height  - (main_clock_size_w / 2) - (main_sec_size_w / 2) - 16), scrreen_height / 2 - 20))
-        screen.blit(main_sec_render, (int(scrreen_height  - (main_sec_size_w / 2) + (main_clock_size_w / 2) + 16), (scrreen_height / 2 - 20) + main_clock_size_h - main_sec_size_h))
+        screen.blit(main_clock_render, (int(scrreen_height  - (main_clock_size_w / 2) - (main_sec_size_w / 2) - 16), scrreen_height / 2 - 40))
+        screen.blit(main_sec_render, (int(scrreen_height  - (main_sec_size_w / 2) + (main_clock_size_w / 2) + 16), (scrreen_height / 2 - 40) + main_clock_size_h - main_sec_size_h))
 
         screen.blit(fps_render, (5, 5))
 
