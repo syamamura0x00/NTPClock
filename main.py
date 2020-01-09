@@ -15,16 +15,16 @@ from ntp import NTPClient
 
 NTP_SERVER_LIST = [
     "ntp.nict.jp"
-    , "ntp.jst.mfeed.ad.jp"
-    , "time.cloudflare.com"
-    , "time.google.com"
-    , "ats1.e-timing.ne.jp"
-    , "s2csntp.miz.nao.ac.jp"
+    # , "ntp.jst.mfeed.ad.jp"
+    # , "time.cloudflare.com"
+    # , "time.google.com"
+    # , "ats1.e-timing.ne.jp"
+    # , "s2csntp.miz.nao.ac.jp"
 ]
 
 TIMEZONE = +9
 
-IS_FULLSCREEN = True
+IS_FULLSCREEN = False
 FRAME_RATE = 60
 SCREEN_WIDTH = 1920
 SCREEN_HEIGHT = 1080
@@ -91,9 +91,9 @@ def main():
         main_clock_render = main_clock_font.render(current_clock_str, False, get_rgb(COLOR_FONT))
         main_sec_render = main_sec_font.render(current_sec_str, False, get_rgb(COLOR_FONT))
 
-        main_date_size = main_date_font.size(current_date_str)
-        main_clock_size = main_clock_font.size(current_clock_str)
-        main_sec_size = main_sec_font.size(current_sec_str)
+        main_date_size_w, main_date_size_h = main_date_font.size(current_date_str)
+        main_clock_size_w, main_clock_size_h = main_clock_font.size(current_clock_str)
+        main_sec_size_w, main_sec_size_h = main_sec_font.size(current_sec_str)
 
 
         # FPSレンダリング
@@ -117,7 +117,9 @@ def main():
         # ================================================================
         screen.fill(get_rgb(COLOR_BG))
 
-        screen.blit(main_date_render, (int((scrreen_height / 2)  - (main_date_size / 2)), 20))
+        print(int(scrreen_height  - (main_date_size_w / 2)))
+
+        screen.blit(main_date_render, (int((scrreen_height / 2)  - (main_date_size_w / 2)), 20))
         screen.blit(main_clock_render, (80, scrreen_height / 2 - 100))
         screen.blit(main_sec_render, (80, scrreen_height / 2 - 100))
 
