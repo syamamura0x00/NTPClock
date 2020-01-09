@@ -16,11 +16,11 @@ from ntp import NTPClient
 
 NTP_SERVER_LIST = [
     "ntp.nict.jp"
-    , "ntp.jst.mfeed.ad.jp"
-    , "time.cloudflare.com"
-    , "time.google.com"
-    , "ats1.e-timing.ne.jp"
-    , "s2csntp.miz.nao.ac.jp"
+    # , "ntp.jst.mfeed.ad.jp"
+    # , "time.cloudflare.com"
+    # , "time.google.com"
+    # , "ats1.e-timing.ne.jp"
+    # , "s2csntp.miz.nao.ac.jp"
 ]
 
 TIMEZONE = +9
