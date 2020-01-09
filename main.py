@@ -67,7 +67,9 @@ def main():
     clock = pygame.time.Clock()
 
     # Initialize fonts
-    main_clock_font = pygame.font.SysFont(None, 200)
+    main_date_font = pygame.font.SysFont(None, 160)
+    main_clock_font = pygame.font.SysFont(None, 240)
+    main_sec_font = pygame.font.SysFont(None, 180)
     fps_font = pygame.font.SysFont(None, 64)
 
     accumulation_fps = []
@@ -80,8 +82,19 @@ def main():
         frame_start_time = time.time()
 
         current_dt = ntp_client.get_datetime()
-        current_str = current_dt.strftime("%Y/%m/%d\n    %H:%M:%S") + f".{str(current_dt.microsecond)[0:1]}"
-        main_clock_render = main_clock_font.render(current_str, False, get_rgb(COLOR_FONT))
+
+        current_date_str = current_dt.strftime("%Y年%m月%d日(%A)")
+        current_clock_str = current_dt.strftime("%H:%M")
+        current_sec_str = f"{current_dt.second}.{str(current_dt.microsecond)[0:1]}"
+
+        main_date_render = main_date_font.render(current_date_str, False, get_rgb(COLOR_FONT))
+        main_clock_render = main_clock_font.render(current_clock_str, False, get_rgb(COLOR_FONT))
+        main_sec_render = main_sec_font.render(current_sec_str, False, get_rgb(COLOR_FONT))
+
+        main_date_size = main_date_font.size(current_date_str)
+        main_clock_size = main_clock_font.size(current_clock_str)
+        main_sec_size = main_sec_font.size(current_sec_str)
+
 
         # FPSレンダリング
         fps_render = fps_font.render(f"{avg_fps:.02f} FPS", False, get_rgb(0x00FF00))
@@ -104,7 +117,10 @@ def main():
         # ================================================================
         screen.fill(get_rgb(COLOR_BG))
 
+        screen.blit(main_date_render, (scrreen_height / 2  - (main_date_size / 2), 20))
         screen.blit(main_clock_render, (80, scrreen_height / 2 - 100))
+        screen.blit(main_sec_render, (80, scrreen_height / 2 - 100))
+
         screen.blit(fps_render, (5, 5))
 
         pygame.display.flip()
