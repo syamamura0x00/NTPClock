@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import os
 import sys
 import time
 import logging
@@ -105,12 +106,12 @@ def main():
         for event in pygame.event.get(): # 終了処理
             if event.type == pygame.QUIT:
                 pygame.quit()
-                sys.exit()
+                os._exit()
 
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.locals.K_ESCAPE:
                     pygame.quit()
-                    sys.exit()
+                    os._exit()
 
         # ================================================================
         # Draw
