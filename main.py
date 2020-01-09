@@ -68,7 +68,7 @@ def main():
 
     # Initialize fonts
     main_clock_font = pygame.font.SysFont(None, 200)
-    fps_font = pygame.font.SysFont(None, 24)
+    fps_font = pygame.font.SysFont(None, 64)
 
     accumulation_fps = []
     avg_fps = 0.0
@@ -80,7 +80,7 @@ def main():
         frame_start_time = time.time()
 
         current_dt = ntp_client.get_datetime()
-        current_str = current_dt.strftime("%Y/%m/%d %H:%M:%S") + f".{str(current_dt.microsecond)[0:1]}"
+        current_str = current_dt.strftime("%Y/%m/%d\n    %H:%M:%S") + f".{str(current_dt.microsecond)[0:1]}"
         main_clock_render = main_clock_font.render(current_str, False, get_rgb(COLOR_FONT))
 
         # FPSレンダリング
