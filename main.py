@@ -119,7 +119,7 @@ def main():
 
         print(int(scrreen_height  - (main_date_size_w / 2)))
 
-        screen.blit(main_date_render, (int((scrreen_height / 2)  - (main_date_size_w / 2)), 20))
+        screen.blit(main_date_render, (int(scrreen_height  - (main_date_size_w / 2)), 20))
         screen.blit(main_clock_render, (80, scrreen_height / 2 - 100))
         screen.blit(main_sec_render, (80, scrreen_height / 2 - 100))
 
