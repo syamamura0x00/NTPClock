@@ -83,7 +83,7 @@ def main():
 
         current_dt = ntp_client.get_datetime()
 
-        current_date_str = current_dt.strftime("%Y年%m月%d日(%A)")
+        current_date_str = current_dt.strftime("%Y/%m/%d/(%A)")
         current_clock_str = current_dt.strftime("%H:%M")
         current_sec_str = f"{current_dt.second}.{str(current_dt.microsecond)[0:1]}"
 
