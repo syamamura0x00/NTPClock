@@ -85,7 +85,7 @@ def main():
 
         current_date_str = current_dt.strftime("%Y/%m/%d/(%a)")
         current_clock_str = current_dt.strftime("%H:%M")
-        current_sec_str = f"{current_dt.second}.{str(current_dt.microsecond)[0:1]}"
+        current_sec_str = f"{current_dt.second:02d}.{str(current_dt.microsecond)[0:1]}"
 
         main_date_render = main_date_font.render(current_date_str, False, get_rgb(COLOR_FONT))
         main_clock_render = main_clock_font.render(current_clock_str, False, get_rgb(COLOR_FONT))
