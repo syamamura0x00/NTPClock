@@ -16,16 +16,16 @@ from ntp import NTPClient
 
 NTP_SERVER_LIST = [
     "ntp.nict.jp"
-    # , "ntp.jst.mfeed.ad.jp"
-    # , "time.cloudflare.com"
-    # , "time.google.com"
-    # , "ats1.e-timing.ne.jp"
-    # , "s2csntp.miz.nao.ac.jp"
+    , "ntp.jst.mfeed.ad.jp"
+    , "time.cloudflare.com"
+    , "time.google.com"
+    , "ats1.e-timing.ne.jp"
+    , "s2csntp.miz.nao.ac.jp"
 ]
 
 TIMEZONE = +9
 
-IS_FULLSCREEN = False
+IS_FULLSCREEN = True
 FRAME_RATE = 60
 SCREEN_WIDTH = 1920
 SCREEN_HEIGHT = 1080
@@ -77,8 +77,12 @@ def main():
     avg_fps = 0.0
     fps = 0.0
     one_sec_timer = time.time()
+    last_sync_time = time.time()
 
     while True:
+        if time.time() - last_sync_time > 3600.0:
+            ntp_client.sync()
+
         # 時刻レンダリング
         frame_start_time = time.time()
 
