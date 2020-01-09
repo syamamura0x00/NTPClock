@@ -119,7 +119,7 @@ def main():
 
         screen.blit(main_date_render, (int(scrreen_height  - (main_date_size_w / 2)), 40))
         screen.blit(main_clock_render, (int(scrreen_height  - (main_clock_size_w / 2) - (main_sec_size_w / 2) - 16), scrreen_height / 2 - 100))
-        screen.blit(main_sec_render, (int(scrreen_height  - (main_sec_size_w / 2) + (main_clock_size_w / 2) + 16), scrreen_height / 2 - 100))
+        screen.blit(main_sec_render, (int(scrreen_height  - (main_sec_size_w / 2) + (main_clock_size_w / 2) + 16), (scrreen_height / 2 - 100) + main_clock_size_h - (main_date_size_h / 2)))
 
         screen.blit(fps_render, (5, 5))
 
@@ -139,7 +139,7 @@ def main():
             if len(accumulation_fps):
                 avg_fps = sum(accumulation_fps) / len(accumulation_fps)
 
-        pygame.display.set_caption(f"NTPClock [FPS: {fps:.02f}, Avg.: {avg_fps:.02f}]")
+        # pygame.display.set_caption(f"NTPClock [FPS: {fps:.02f}, Avg.: {avg_fps:.02f}]")
 
         # ================================================================
         # VSYNC
