@@ -12,6 +12,7 @@ from pygame.locals import *
 
 
 from ntp import NTPClient
+import process_mon
 
 
 NTP_SERVER_LIST = [
@@ -38,6 +39,8 @@ COLOR_INFO = 0xB4C43B
 
 def main():
     logging.basicConfig(level=logging.DEBUG)
+
+    process_monitor = process_mon.ProcessMonitor()
 
     ntp_client = NTPClient(NTP_SERVER_LIST, TIMEZONE)
     ntp_client.sync()
@@ -79,6 +82,8 @@ def main():
     one_sec_timer = time.time()
     last_sync_time = time.time()
 
+    process_monitor.start()
+
     while True:
         if time.time() - last_sync_time > 3600.0:
             ntp_client.sync()
@@ -110,12 +115,12 @@ def main():
         for event in pygame.event.get(): # 終了処理
             if event.type == pygame.QUIT:
                 pygame.quit()
-                os._exit()
+                os._exit(0)
 
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.locals.K_ESCAPE:
                     pygame.quit()
-                    os._exit()
+                    os._exit(0)
 
         # ================================================================
         # Draw
@@ -154,6 +159,7 @@ def main():
         if vsync_wait > frame_time:
             time.sleep(vsync_wait - frame_time)
 
+        process_monitor.process_message()
 
 
 def get_rgb(hex):
