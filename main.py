@@ -159,6 +159,8 @@ def main():
         if vsync_wait > frame_time:
             time.sleep(vsync_wait - frame_time)
 
+        time.sleep(0.05)
+
         process_monitor.process_message()
 
 
